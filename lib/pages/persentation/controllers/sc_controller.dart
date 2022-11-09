@@ -6,6 +6,27 @@ import 'package:get/get.dart';
 import 'package:untitled/base/base_controller.dart';
 import 'package:untitled/model.dart';
 
+class Document extends BaseController {
+  TextEditingController textSymbolsTEC = TextEditingController();
+  TextEditingController nameTextTEC = TextEditingController();
+  TextEditingController dayTextTEC = TextEditingController();
+  TextEditingController noteTEC = TextEditingController();
+
+  Document(
+    this.textSymbolsTEC,
+    this.nameTextTEC,
+    this.dayTextTEC,
+    this.noteTEC,
+  );
+
+  toJson() => {
+        "A": textSymbolsTEC.text,
+        "B": nameTextTEC.text,
+        "C": dayTextTEC.text,
+        "D": noteTEC.text,
+      };
+}
+
 class CvController extends BaseController {
   //Khởi tạo form key cùng controller cho textfield
   final GlobalKey<FormState> nameJobFormKey = GlobalKey();
@@ -20,6 +41,10 @@ class CvController extends BaseController {
       dayStartController,
       dayEndController,
       timeEndController,
+      // symbolsController,
+      // nameTextController,
+      // dayTextController,
+      // noteController,
       hostController;
 
   RxBool checkDrop = false.obs;
@@ -49,6 +74,10 @@ class CvController extends BaseController {
     timeEndController = TextEditingController();
     dayStartController = TextEditingController();
     dayEndController = TextEditingController();
+    // symbolsController = TextEditingController();
+    // nameTextController = TextEditingController();
+    // dayTextController = TextEditingController();
+    // noteController = TextEditingController();
   }
 
   @override
@@ -78,5 +107,23 @@ class CvController extends BaseController {
       cv.value = File(file.paths[0]!);
       checkCv.value = true;
     }
+  }
+
+  //List văn bản
+  RxList<Document?> listDocument = <Document?>[
+    Document(
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+      TextEditingController(),
+    )
+  ].obs;
+
+  //THêm văn bản
+  void addDocument() {
+    print('Oke');
+    listDocument.add(Document(TextEditingController(), TextEditingController(),
+        TextEditingController(), TextEditingController()));
+    update();
   }
 }

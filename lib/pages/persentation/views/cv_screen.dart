@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +14,7 @@ import 'package:untitled/custom_view/text_field_none_validate.dart';
 import 'package:untitled/custom_view/text_required.dart';
 import 'package:untitled/custom_view/widget_circle_choose.dart';
 import 'package:untitled/pages/persentation/controllers/sc_controller.dart';
+import 'package:untitled/pages/persentation/views/add_document.dart';
 import 'package:untitled/shared/utils/convert.dart';
 import 'package:untitled/shared/utils/validate.dart';
 
@@ -43,7 +45,8 @@ class CvScreen extends GetView<CvController> {
                   required: true,
                 ),
                 PillTextField(
-                  prefixIcon: const Icon(Icons.menu_book_outlined,color: AppColors.blueColor),
+                  prefixIcon: const Icon(Icons.menu_book_outlined,
+                      color: AppColors.blueColor),
                   formKey: controller.nameJobFormKey,
                   controller: controller.nameJobController,
                   validator: (value) => Validate.validateNotEmpty(
@@ -55,7 +58,8 @@ class CvScreen extends GetView<CvController> {
                 TextFieldNoneValidate(
                     controller: controller.detailJobController,
                     hintText: 'Nhập mô tả công việc',
-                    prefixIcon: const Icon(Icons.book_sharp,color: AppColors.blueColor)),
+                    prefixIcon: const Icon(Icons.book_sharp,
+                        color: AppColors.blueColor)),
                 const SizedBox(height: 10),
                 const TextRequired(text: 'Thời gian bắt đầu'),
                 Row(
@@ -142,28 +146,33 @@ class CvScreen extends GetView<CvController> {
                 const SizedBox(height: 10),
                 const TextRequired(text: 'Chủ trì', required: true),
                 PillTextField(
-                  prefixIcon: const Icon(Icons.person,color: AppColors.blueColor),
+                  prefixIcon:
+                      const Icon(Icons.person, color: AppColors.blueColor),
                   formKey: controller.hostFormKey,
                   controller: controller.hostController,
                   validator: (value) => Validate.validateNotEmpty(
                       value!, 'Người chủ trì không được để trống!'),
                   hintText: 'Gán @ để chọn tên chủ trì',
-                  suffixIcon: const Icon(Icons.search,color: AppColors.blueColor),
+                  suffixIcon:
+                      const Icon(Icons.search, color: AppColors.blueColor),
                 ),
                 const SizedBox(height: 10),
                 const TextRequired(text: 'Phối hợp'),
                 TextFieldNoneValidate(
                   controller: controller.coordinateController,
                   hintText: 'Gán @ để chọn phối hợp',
-                  prefixIcon: const Icon(Icons.person_add_alt_1,color: AppColors.blueColor),
-                  suffixIcon: const Icon(Icons.search,color: AppColors.blueColor),
+                  prefixIcon: const Icon(Icons.person_add_alt_1,
+                      color: AppColors.blueColor),
+                  suffixIcon:
+                      const Icon(Icons.search, color: AppColors.blueColor),
                 ),
                 const SizedBox(height: 10),
                 const TextRequired(text: 'Giám sát'),
                 TextFieldNoneValidate(
                   controller: controller.monitoringController,
                   hintText: 'Gán @ để chọn giám sát',
-                  prefixIcon: const Icon(Icons.person_outline,color: AppColors.blueColor),
+                  prefixIcon: const Icon(Icons.person_outline,
+                      color: AppColors.blueColor),
                 ),
                 const SizedBox(height: 10),
                 const TextRequired(text: 'Nhóm công việc'),
@@ -179,20 +188,81 @@ class CvScreen extends GetView<CvController> {
                       context: context,
                       builder: (context) => buildSheetGender(context)),
                 ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () => controller.listDocument.last!.textSymbolsTEC
+                                  .text.isNotEmpty &&
+                              controller.listDocument.last!.nameTextTEC.text
+                                  .isNotEmpty &&
+                              controller.listDocument.last!.dayTextTEC.text
+                                  .isNotEmpty &&
+                              controller
+                                  .listDocument.last!.noteTEC.text.isNotEmpty
+                          ? controller.addDocument()
+                          : null,
+                      child: Row(
+                        children: const [
+                          TextRequired(text: "Văn bản "),
+                          Icon(
+                            Icons.add_circle,
+                            color: AppColors.greenColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Obx(
+                  () => SizedBox(
+                    height: 220 *
+                        double.parse(controller.listDocument.length.toString()),
+                    child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.listDocument.length,
+                        itemBuilder: (context, index) {
+                          var education = controller.listDocument[index]!;
+                          return Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            decoration: BoxDecoration(
+                              color: AppColors.whiteColor,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: AddDocument(
+                              dayText: education.dayTextTEC,
+                              note: education.noteTEC,
+                              textSymbols: education.textSymbolsTEC,
+                              nameText: education.nameTextTEC,
+                              onTap: () {
+                                controller.listDocument
+                                    .remove(controller.listDocument[index]);
+                                if (controller.listDocument.isEmpty) {
+                                  controller.addDocument();
+                                }
+                              },
+                            ),
+                          );
+                        }),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 const TextRequired(
                   text: "Tài liệu đính kèm",
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 10),
                 InkWell(
                   onTap: () => controller.upLoadFile(),
-                  child: Center(
-                    child: Container(
-                        height: 50,
-                        width: AppDimens.width,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: AppColors.whiteColor,
-                        ),
+                  child: DottedBorder(
+                      borderType: BorderType.RRect,
+                      radius: const Radius.circular(10),
+                      color: controller.checkCv.value
+                          ? AppColors.greenColor
+                          : AppColors.redColor,
+                      strokeWidth: 1,
+                      child: SizedBox(
+                        height: 40,
                         child: controller.checkCv.value
                             ? Center(
                                 child: Text(
@@ -221,8 +291,8 @@ class CvScreen extends GetView<CvController> {
                                     ),
                                   )
                                 ],
-                              )),
-                  ),
+                              ),
+                      )),
                 ),
                 const SizedBox(height: 20),
                 Row(
