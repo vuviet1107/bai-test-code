@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:untitled/routes/app_pages.dart';
 
-import 'constants/app_colors.dart';
-import 'cv_screen/cv_screen.dart';
-
 void main() {
   runApp(const MyApp());
 }

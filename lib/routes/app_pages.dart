@@ -1,7 +1,7 @@
 
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:untitled/cv_screen/cv_binding.dart';
-import 'package:untitled/cv_screen/cv_screen.dart';
+import 'package:untitled/pages/bindings/cv_binding.dart';
+import 'package:untitled/pages/persentation/views/cv_screen.dart';
 
 part 'app_routes.dart';
 

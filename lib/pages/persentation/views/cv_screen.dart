@@ -8,12 +8,11 @@ import 'package:untitled/custom_view/choose_text_field.dart';
 import 'package:untitled/custom_view/container_choose.dart';
 import 'package:untitled/custom_view/custom_buttom.dart';
 import 'package:untitled/custom_view/pill_text_field.dart';
-import 'package:untitled/custom_view/show_day.dart';
 import 'package:untitled/custom_view/show_time.dart';
 import 'package:untitled/custom_view/text_field_none_validate.dart';
 import 'package:untitled/custom_view/text_required.dart';
 import 'package:untitled/custom_view/widget_circle_choose.dart';
-import 'package:untitled/cv_screen/sc_controller.dart';
+import 'package:untitled/pages/persentation/controllers/sc_controller.dart';
 import 'package:untitled/shared/utils/convert.dart';
 import 'package:untitled/shared/utils/validate.dart';
 
