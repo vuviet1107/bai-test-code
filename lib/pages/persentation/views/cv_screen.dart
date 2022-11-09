@@ -71,7 +71,8 @@ class CvScreen extends GetView<CvController> {
                         onPress: () => showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime(2010),
+                          firstDate:
+                              DateTime.now().subtract(const Duration(days: 10)),
                           lastDate: DateTime.now(),
                           confirmText: 'Xác nhận',
                           helpText: 'Chọn ngày',
