@@ -3,10 +3,9 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled/base/base_controller.dart';
 import 'package:untitled/model.dart';
 
-class Document extends BaseController {
+class Document extends GetxController {
   TextEditingController textSymbolsTEC = TextEditingController();
   TextEditingController nameTextTEC = TextEditingController();
   TextEditingController dayTextTEC = TextEditingController();
@@ -27,7 +26,7 @@ class Document extends BaseController {
       };
 }
 
-class CvController extends BaseController {
+class CvController extends GetxController {
   //Khởi tạo form key cùng controller cho textfield
   final GlobalKey<FormState> nameJobFormKey = GlobalKey();
   final GlobalKey<FormState> hostFormKey = GlobalKey();

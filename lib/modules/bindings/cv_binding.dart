@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:untitled/pages/persentation/controllers/sc_controller.dart';
-import 'package:untitled/pages/repository/chat_repository.dart';
-import 'package:untitled/pages/repository/repository_adapter.dart';
+import 'package:untitled/modules/persentation/controllers/sc_controller.dart';
+import 'package:untitled/modules/repository/cv_repository.dart';
+import 'package:untitled/modules/repository/repository_adapter.dart';
 
 class CvBinding extends Bindings {
   @override

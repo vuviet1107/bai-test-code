@@ -1,5 +1,6 @@
 
-import 'package:untitled/pages/repository/repository_adapter.dart';
+
+import 'package:untitled/modules/repository/repository_adapter.dart';
 
 class CvResponse implements ICvRepository {
   CvResponse(
